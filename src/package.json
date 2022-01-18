@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node",
-    "test": "NODE_ENV=test jest --forceExit",
-    "test:watch": "NODE_ENV=test jest --watchAll",
+    "test": "set NODE_ENV=test&&jest --forceExit",
+    "test:watch": "set NODE_ENV=test&&jest --watchAll",
     "coverage": "jest --coverage"
   },
   "keywords": [],
