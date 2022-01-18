@@ -20,10 +20,18 @@ const search = async (filters) => {
 
   // Sort
   if (filters.sort)
-    results = _.filter(
+    results = _.orderBy(
       results,
       Object.keys(filters.sort),
       Object.values(filters.sort)
+    );
+
+  //Pagination
+  if (filters.pageNumber && filters.pageSize)
+    results = _.slice(
+      results,
+      (filters.pageNumber - 1) * filters.pageSize,
+      filters.pageNumber * filters.pageSize
     );
 
   return results;
