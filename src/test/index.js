@@ -22,7 +22,7 @@ const testFilters = {
   to: 1500,
   region: "Asia",
   sort: {
-    name: "desc",
+    name: "asc",
   },
 };
 
