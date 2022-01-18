@@ -37,4 +37,33 @@ const search = async (filters) => {
   return results;
 };
 
+/**
+ * This function receive a string in the form:
+ * @query (sort=sortField1:order1,sortField2:order2,...,sortFieldN:orderN)
+ * and returns an object in the form of:
+ * @object
+ * {
+ *      sortField1: order1,
+ *      sortField2: order2,
+ *      .
+ *      .
+ *      .
+ *      sortFieldN: orderN
+ * }
+ *
+ * @param {string} sortQuery
+ * @returns {object}
+ */
+
+const sortQueryHandler = (sortQuery) => {
+  const sortFields = sortQuery.split(",");
+  let sortObject = {};
+  sortFields.forEach((field) => {
+    let [sortField, order] = field.split(":");
+    sortObject[sortField] = order;
+  });
+  return sortObject;
+};
+
+module.exports.sortQueryHandler = sortQueryHandler;
 module.exports.search = search;

@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express");
-const { search } = require("./handler");
+const { search, sortQueryHandler } = require("./handler");
 
 // App
 const app = express();
@@ -15,6 +15,7 @@ app.use("/", [router]);
 const PORT = 4400;
 const HOST = "localhost";
 
+// Tests filters
 const testFilters = {
   pageNumber: 1,
   pageSize: 10,
@@ -27,7 +28,14 @@ const testFilters = {
 };
 
 app.get("/test", async (req, res) => {
-  const results = await search(testFilters);
+  //   const results = await search(testFilters); // Tests
+
+  // With request query (endpoint)
+  const { sort, ...rest } = req.query;
+  const sortObject = sort ? sortQueryHandler(sort) : undefined;
+  const filters = sortObject ? { sort: sortObject, ...rest } : { ...rest };
+  const results = await search(filters);
+  //
   res.json(results);
 });
 
