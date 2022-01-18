@@ -15,6 +15,8 @@ const search = async (filters) => {
   if (filters.to)
     results = _.filter(results, (country) => country.population <= filters.to);
 
+  //By region
+  if (filters.region) results = _.filter(results, { region: filters.region });
   return results;
 };
 
